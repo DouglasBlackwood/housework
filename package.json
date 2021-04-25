@@ -1,0 +1,16 @@
+{
+  "name": "housework",
+  "version": "0.1.0",
+  "description": "Manage reccuring tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "housework",
+    "task",
+    "recurring"
+  ],
+  "author": "douglas.blackwood@protonmail.com",
+  "license": "ISC"
+}
