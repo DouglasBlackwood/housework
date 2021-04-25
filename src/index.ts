@@ -1,5 +1,9 @@
-function sum(a: number, b: number) {
-    return a + b;
+class Task {
+    title: string;
+
+    constructor(title: string) {
+        this.title = title;
+    }
 }
 
-export { sum };
+export { Task };

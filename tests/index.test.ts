@@ -1,5 +1,7 @@
-import { sum } from '../src';
+import { Task } from '../src';
 
-test('test', () => {
-    expect(sum(1,1)).toBe(2);
+test('create task with title', () => {
+    let task = new Task('Chore');
+
+    expect(task.title).toBe('Chore');
 });
