@@ -10,10 +10,10 @@ class Task {
     }
 
     public get is_done(): boolean {
-        if (!this.done_at) {
+        if (this.done_at === undefined) {
             return false;
         }
-        
+
         let today = new Date();
         return this.undone_at && this.undone_at <= today ? false : true;
     }
