@@ -10,16 +10,12 @@ class Task {
     }
 
     public get is_done(): boolean {
-        if (this.done_at) {
-            if (this.undone_at) {
-                let today = new Date();
-                return this.undone_at > today;
-            } else {
-                return true
-            }
-        } else {
+        if (!this.done_at) {
             return false;
         }
+        
+        let today = new Date();
+        return this.undone_at && this.undone_at <= today ? false : true;
     }
 
     public get undone_at(): Date | undefined {
