@@ -12,5 +12,8 @@
     "recurring"
   ],
   "author": "douglas.blackwood@protonmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }
