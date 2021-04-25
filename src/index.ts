@@ -1,23 +1,34 @@
 class Task {
     title: string;
-    time_till_undone?: number;
+    days_till_undone?: number;
     done_at?: Date;
 
-    constructor({title, time_till_undone, done_at}: TaskConstructorInterface) {
+    constructor({ title, days_till_undone, done_at }: TaskConstructorInterface) {
         this.title = title;
-        this.time_till_undone = time_till_undone;
+        this.days_till_undone = days_till_undone;
         this.done_at = done_at;
     }
 
     public get is_done(): boolean {
-        return this.done_at ? true : false;
+        if (this.done_at) {
+            if (this.days_till_undone) {
+                let today = new Date();
+                let undone_at = new Date();
+                undone_at.setDate(this.done_at.getDate() + this.days_till_undone);
+                return undone_at > today;
+            } else {
+                return true
+            }
+        } else {
+            return false;
+        }
     }
 
 }
 
 interface TaskConstructorInterface {
     title: string;
-    time_till_undone?: number;
+    days_till_undone?: number;
     done_at?: Date;
 }
 
