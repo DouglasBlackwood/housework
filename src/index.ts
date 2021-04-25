@@ -11,11 +11,9 @@ class Task {
 
     public get is_done(): boolean {
         if (this.done_at) {
-            if (this.days_till_undone) {
+            if (this.undone_at) {
                 let today = new Date();
-                let undone_at = new Date();
-                undone_at.setDate(this.done_at.getDate() + this.days_till_undone);
-                return undone_at > today;
+                return this.undone_at > today;
             } else {
                 return true
             }
@@ -23,6 +21,15 @@ class Task {
             return false;
         }
     }
+
+    public get undone_at(): Date | undefined {
+        if (this.done_at && this.days_till_undone) {
+            let undone_at = new Date();
+            undone_at.setDate(this.done_at.getDate() + this.days_till_undone);
+            return undone_at;
+        }
+    }
+
 
 }
 
