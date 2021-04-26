@@ -1,13 +1,9 @@
+import { Calendar } from './calendar';
+
 enum Status {
     Late,
     ToDo,
     Done
-}
-
-class Calendar {
-    public static get today() : Date {
-        return new Date();
-    }
 }
 
 class Task {
