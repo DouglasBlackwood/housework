@@ -4,6 +4,12 @@ enum Status {
     Done
 }
 
+class Calendar {
+    public static get today() : Date {
+        return new Date();
+    }
+}
+
 class Task {
     title: string;
     days_till_undone?: number;
@@ -20,8 +26,7 @@ class Task {
             return false;
         }
 
-        let today = new Date();
-        return this.undone_at && this.undone_at <= today ? false : true;
+        return this.undone_at && this.undone_at <= Calendar.today ? false : true;
     }
 
     public get undone_at(): Date | undefined {
@@ -30,6 +35,10 @@ class Task {
             undone_at.setDate(this.done_at.getDate() + this.days_till_undone);
             return undone_at;
         }
+    }
+
+    public get is_late(): boolean {
+        return this.late_at && this.late_at <= Calendar.today ? true : false;
     }
 
     public get late_at(): Date | undefined {
@@ -46,11 +55,9 @@ class Task {
 
 
     public get status(): Status {
-        let today = new Date();
-        
         if (this.is_done) {
             return Status.Done
-        } else if (this.late_at && this.late_at <= today) {
+        } else if (this.is_late) {
             return Status.Late;
         } else {
             return Status.ToDo;
