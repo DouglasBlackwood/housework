@@ -29,7 +29,7 @@ class Task {
 
     public get undone_at(): Date | undefined {
         if (this.done_at && this.days_till_undone) {
-            let undone_at = new Date();
+            let undone_at = new Date(this.done_at.getTime());
             undone_at.setDate(this.done_at.getDate() + this.days_till_undone);
             return undone_at;
         }
@@ -41,19 +41,18 @@ class Task {
 
     public get late_at(): Date | undefined {
         if (this.done_at && this.days_till_late) {
-            let late_at = new Date();
+            let late_at = new Date(this.done_at.getTime());
             late_at.setDate(this.done_at.getDate() + this.days_till_late);
             return late_at;
         }
     }
 
-    
-    public get days_till_late() : number | undefined {
+    public get days_till_late(): number | undefined {
         if (this.days_till_undone) {
             return Math.ceil(this.days_till_undone * this.late_factor)
         }
     }
-    
+
 
 
     public get status(): Status {

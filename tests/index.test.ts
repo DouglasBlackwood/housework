@@ -62,6 +62,26 @@ test('create recurring task late', () => {
     let done_at = new Date();
     done_at.setDate(done_at.getDate() - 2);
     let task = new Task({title: 'Chore', days_till_undone: 1, done_at: done_at});
-
+    
     expect(task.status).toBe(Status.Late);
 });
+
+test('task due every 1 day is late after 2 days', () => {
+    let done_at = new Date();
+    let task = new Task({title: 'Chore', days_till_undone: 1, done_at: done_at});
+
+    let expected_late_at = new Date(done_at.getTime());
+    expected_late_at.setDate(done_at.getDate() + 2);
+
+    expect(task.late_at).toStrictEqual(expected_late_at);
+})
+
+test('task due every 2 day is late after 3 days', () => {
+    let done_at = new Date();
+    let task = new Task({title: 'Chore', days_till_undone: 2, done_at: done_at});
+
+    let expected_late_at = new Date(done_at.getTime());
+    expected_late_at.setDate(done_at.getDate() + 3);
+
+    expect(task.late_at).toStrictEqual(expected_late_at);
+})
