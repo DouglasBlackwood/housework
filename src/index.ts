@@ -11,6 +11,8 @@ class Task {
     days_till_undone?: number;
     done_at?: Date;
 
+    late_factor: number = 1.5;
+
     constructor({ title, days_till_undone, done_at }: TaskConstructorInterface) {
         this.title = title;
         this.days_till_undone = days_till_undone;
@@ -38,16 +40,20 @@ class Task {
     }
 
     public get late_at(): Date | undefined {
-        if (this.done_at && this.days_till_undone) {
+        if (this.done_at && this.days_till_late) {
             let late_at = new Date();
-            late_at.setDate(this.done_at.getDate() + Math.ceil(this.days_till_undone * 1.5));
+            late_at.setDate(this.done_at.getDate() + this.days_till_late);
             return late_at;
         }
     }
 
-    undo(): void {
-        this.done_at = undefined;
+    
+    public get days_till_late() : number | undefined {
+        if (this.days_till_undone) {
+            return Math.ceil(this.days_till_undone * this.late_factor)
+        }
     }
+    
 
 
     public get status(): Status {
@@ -58,6 +64,10 @@ class Task {
         } else {
             return Status.ToDo;
         }
+    }
+
+    undo(): void {
+        this.done_at = undefined;
     }
 
 }
