@@ -56,6 +56,7 @@ test('undo task', () => {
     task.undo();
 
     expect(task.is_done).toBeFalsy();
+    expect(task.done_at).toBeUndefined();
 });
 
 test('set task done', () => {
@@ -64,6 +65,7 @@ test('set task done', () => {
     task.setDoneAt(done_at);
 
     expect(task.is_done).toBeTruthy();
+    expect(task.done_at).toStrictEqual(done_at);
 });
 
 test('create recurring task late', () => {
