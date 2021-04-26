@@ -67,6 +67,10 @@ class Task {
         this.done_at = undefined;
     }
 
+    setDoneAt(done_at: Date): void {
+        this.done_at = done_at;
+    }
+
 }
 
 interface TaskConstructorInterface {

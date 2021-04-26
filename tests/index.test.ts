@@ -58,6 +58,14 @@ test('undo task', () => {
     expect(task.is_done).toBeFalsy();
 });
 
+test('set task done', () => {
+    let done_at = new Date();
+    let task = new Task({title: 'Chore'});
+    task.setDoneAt(done_at);
+
+    expect(task.is_done).toBeTruthy();
+});
+
 test('create recurring task late', () => {
     let done_at = new Date();
     done_at.setDate(done_at.getDate() - 2);
