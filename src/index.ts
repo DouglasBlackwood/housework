@@ -25,8 +25,10 @@ class Task {
             return undone_at;
         }
     }
-
-
+    
+    undo(): void {
+        this.done_at = undefined;
+    }
 }
 
 interface TaskConstructorInterface {

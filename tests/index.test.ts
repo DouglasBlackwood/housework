@@ -48,3 +48,11 @@ test('create recurring task undone', () => {
     expect(task.done_at).toBe(done_at);
     expect(task.is_done).toBeFalsy();
 });
+
+test('undo task', () => {
+    let done_at = new Date();
+    let task = new Task({title: 'Chore', done_at: done_at});
+    task.undo();
+
+    expect(task.is_done).toBeFalsy();
+});
