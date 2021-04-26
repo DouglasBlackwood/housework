@@ -53,8 +53,6 @@ class Task {
         }
     }
 
-
-
     public get status(): Status {
         if (this.is_done) {
             return Status.Done
