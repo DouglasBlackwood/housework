@@ -1,5 +1,5 @@
 import { Calendar } from './calendar';
-import { Status } from './task_status';
+import { TaskStatus } from './task_status';
 
 
 class Task {
@@ -49,13 +49,13 @@ class Task {
         }
     }
 
-    public get status(): Status {
+    public get status(): TaskStatus {
         if (this.is_done) {
-            return Status.Done
+            return TaskStatus.Done
         } else if (this.is_late) {
-            return Status.Late;
+            return TaskStatus.Late;
         } else {
-            return Status.ToDo;
+            return TaskStatus.ToDo;
         }
     }
 

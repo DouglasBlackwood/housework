@@ -1,4 +1,4 @@
-import { Task, Status } from '../src';
+import { Task, TaskStatus } from '../src';
 
 test('create non-recurring task not done', () => {
     let task = new Task({ title: 'Chore' });
@@ -7,7 +7,7 @@ test('create non-recurring task not done', () => {
     expect(task.days_till_undone).toBeUndefined();
     expect(task.done_at).toBeUndefined();
     expect(task.is_done).toBeFalsy();
-    expect(task.status).toBe(Status.ToDo);
+    expect(task.status).toBe(TaskStatus.ToDo);
 });
 
 test('create non-recurring task done', () => {
@@ -17,7 +17,7 @@ test('create non-recurring task done', () => {
     expect(task.days_till_undone).toBeUndefined();
     expect(task.done_at).toBe(done_at);
     expect(task.is_done).toBeTruthy();
-    expect(task.status).toBe(Status.Done);
+    expect(task.status).toBe(TaskStatus.Done);
 });
 
 test('create recurring task not done', () => {
@@ -26,7 +26,7 @@ test('create recurring task not done', () => {
     expect(task.days_till_undone).toBe(1);
     expect(task.done_at).toBeUndefined();
     expect(task.is_done).toBeFalsy();
-    expect(task.status).toBe(Status.ToDo);
+    expect(task.status).toBe(TaskStatus.ToDo);
 });
 
 test('create recurring task done', () => {
@@ -36,7 +36,7 @@ test('create recurring task done', () => {
     expect(task.days_till_undone).toBe(1);
     expect(task.done_at).toBe(done_at);
     expect(task.is_done).toBeTruthy();
-    expect(task.status).toBe(Status.Done);
+    expect(task.status).toBe(TaskStatus.Done);
 });
 
 test('create recurring task undone', () => {
@@ -47,7 +47,7 @@ test('create recurring task undone', () => {
     expect(task.days_till_undone).toBe(1);
     expect(task.done_at).toBe(done_at);
     expect(task.is_done).toBeFalsy();
-    expect(task.status).toBe(Status.ToDo);
+    expect(task.status).toBe(TaskStatus.ToDo);
 });
 
 test('undo task', () => {
@@ -73,7 +73,7 @@ test('create recurring task late', () => {
     done_at.setDate(done_at.getDate() - 2);
     let task = new Task({ title: 'Chore', days_till_undone: 1, done_at: done_at });
 
-    expect(task.status).toBe(Status.Late);
+    expect(task.status).toBe(TaskStatus.Late);
 });
 
 test('task due every 1 day is late after 2 days', () => {

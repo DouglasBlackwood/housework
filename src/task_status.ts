@@ -1,7 +1,7 @@
-enum Status {
+enum TaskStatus {
     Late,
     ToDo,
     Done
 }
 
-export { Status };
+export { TaskStatus };
