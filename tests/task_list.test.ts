@@ -20,6 +20,8 @@ describe('task list behaviour', () => {
 
     test('task order', () => {
         const today = new Date();
+        let two_days_ago = new Date();
+        two_days_ago.setDate(today.getDate() - 2);
         const task_list = createEmptyList();
         const task_done_bis = new Task({ title: 'done bis', done_at: today })
         task_list.add(task_done_bis);
@@ -27,8 +29,10 @@ describe('task list behaviour', () => {
         task_list.add(task_done);
         const task_todo = new Task({ title: 'todo' });
         task_list.add(task_todo);
+        const task_late = new Task({ title: 'late', done_at: two_days_ago, days_till_undone: 1 });
+        task_list.add(task_late);
 
-        const expected_order = [task_todo, task_done, task_done_bis];
+        const expected_order = [task_late, task_todo, task_done, task_done_bis];
 
         expect(task_list.count).toBe(expected_order.length);
 
