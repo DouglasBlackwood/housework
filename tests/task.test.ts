@@ -61,12 +61,12 @@ describe('task behaviour', () => {
     });
 
     test('set task done', () => {
-        let done_at = new Date();
+        let new_done_at = new Date();
         let task = new Task({ title: 'Chore' });
-        task.setDoneAt(done_at);
+        task.setDoneAt(new_done_at);
 
         expect(task.is_done).toBeTruthy();
-        expect(task.done_at).toStrictEqual(done_at);
+        expect(task.done_at).toStrictEqual(new_done_at);
     });
 
     test('create recurring task late', () => {
@@ -96,4 +96,20 @@ describe('task behaviour', () => {
 
         expect(task.late_at).toStrictEqual(expected_late_at);
     })
+
+    test('change task recurrence', () => {
+        let new_days_till_undone = 5;
+        let task = new Task({ title: 'Chore' });
+        task.setDaysTillUndone(new_days_till_undone);
+
+        expect(task.days_till_undone).toStrictEqual(new_days_till_undone);
+    });
+
+    test('change task title', () => {
+        let new_title = 'Nouveau titre';
+        let task = new Task({ title: 'Ancien titre' });
+        task.setTitle(new_title);
+
+        expect(task.title).toStrictEqual(new_title);
+    });
 })

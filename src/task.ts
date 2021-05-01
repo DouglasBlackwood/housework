@@ -67,6 +67,14 @@ class Task {
         this.done_at = done_at;
     }
 
+    setDaysTillUndone(days_till_undone: number): void {
+        this.days_till_undone = days_till_undone;
+    }
+
+    setTitle(title: string): void {
+        this.title = title;
+    }
+
 }
 
 interface TaskConstructorInterface {
