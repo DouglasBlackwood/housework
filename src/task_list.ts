@@ -10,6 +10,15 @@ class TaskList {
 
     add(task: Task): void {
         this.data.push(task);
+        this.data.sort((a, b)=>{
+            if (a.status < b.status) {
+                return -1;
+            } else if (a.status > b.status) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
     }
 
     remove(task: Task): void {

@@ -33,10 +33,12 @@ describe('task list behaviour', () => {
         const task_iterator = task_list.getIterator();
         while (!task_iterator.done) {
             const task = task_iterator.next();
-            const expected_task  = expected_order[task_iterator.current_index];
             expect(task).toBeInstanceOf(Task);
+            
+            const expected_task  = expected_order[task_iterator.current_index];
             expect(expected_task).toBeInstanceOf(Task);
-            // expect(task).toEqual(expected_task);
+            
+            expect(task).toEqual(expected_task);
         }
     })
 })
