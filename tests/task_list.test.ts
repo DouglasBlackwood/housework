@@ -18,7 +18,27 @@ describe('task list behaviour', () => {
         expect(task_list.count).toBe(0);
     })
 
-    test.todo('task sort')
+    test('task order', () => {
+        const today = new Date();
+        const task_list = createEmptyList();
+        const task_done = new Task({ title: 'done', done_at: today })
+        task_list.add(task_done);
+        const task_todo = new Task({ title: 'todo' });
+        task_list.add(task_todo);
+
+        const expected_order = [task_todo, task_done];
+
+        expect(task_list.count).toBe(expected_order.length);
+
+        const task_iterator = task_list.getIterator();
+        while (!task_iterator.done) {
+            const task = task_iterator.next();
+            const expected_task  = expected_order[task_iterator.current_index];
+            expect(task).toBeInstanceOf(Task);
+            expect(expected_task).toBeInstanceOf(Task);
+            // expect(task).toEqual(expected_task);
+        }
+    })
 })
 
 function createSimpleTask() {

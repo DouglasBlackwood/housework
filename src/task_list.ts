@@ -1,7 +1,8 @@
 import { Task } from './task';
+import { Iterator } from './iterator';
 
 class TaskList {
-    data: Task[] = [];
+    private data: Task[] = [];
 
     public get count(): number {
         return this.data.length;
@@ -12,8 +13,47 @@ class TaskList {
     }
 
     remove(task: Task): void {
-        let task_index = this.data.indexOf(task);
+        const task_index = this.data.indexOf(task);
         this.data.splice(task_index, 1);
+    }
+
+    public get tasks() {
+        return this.data.slice();
+    }
+
+    getIterator(): TaskIterator {
+        return new TaskIterator(this.tasks);
+    }
+}
+
+class TaskIterator implements Iterator<Task> {
+    private tasks: Task[];
+    private next_position: number = 0;
+    
+    constructor(tasks: Task[]) {
+        this.tasks = tasks
+    }
+    
+    current(): Task {
+        return this.tasks[this.next_position];
+    }
+
+    next(): Task {
+        const item = this.tasks[this.next_position];
+        this.next_position += 1;
+        return item;
+    }
+
+    public get current_index(): number {
+        return this.next_position - 1;
+    }
+
+    public get done(): boolean {
+        return this.next_position === this.tasks.length;
+    }
+
+    rewind(): void {
+        this.next_position = 0;
     }
 }
 
