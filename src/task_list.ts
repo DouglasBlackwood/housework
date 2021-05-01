@@ -15,6 +15,10 @@ class TaskList {
                 return -1;
             } else if (a.status > b.status) {
                 return 1;
+            } else if (a.title < b.title) {
+                return -1;
+            } else if (a.title > b.title) {
+                return 1;
             } else {
                 return 0;
             }

@@ -21,12 +21,14 @@ describe('task list behaviour', () => {
     test('task order', () => {
         const today = new Date();
         const task_list = createEmptyList();
+        const task_done_bis = new Task({ title: 'done bis', done_at: today })
+        task_list.add(task_done_bis);
         const task_done = new Task({ title: 'done', done_at: today })
         task_list.add(task_done);
         const task_todo = new Task({ title: 'todo' });
         task_list.add(task_todo);
 
-        const expected_order = [task_todo, task_done];
+        const expected_order = [task_todo, task_done, task_done_bis];
 
         expect(task_list.count).toBe(expected_order.length);
 
@@ -34,10 +36,10 @@ describe('task list behaviour', () => {
         while (!task_iterator.done) {
             const task = task_iterator.next();
             expect(task).toBeInstanceOf(Task);
-            
-            const expected_task  = expected_order[task_iterator.current_index];
+
+            const expected_task = expected_order[task_iterator.current_index];
             expect(expected_task).toBeInstanceOf(Task);
-            
+
             expect(task).toEqual(expected_task);
         }
     })
