@@ -3,7 +3,7 @@ import { Task } from './task';
 class TaskList {
     data: Task[] = [];
 
-    count(): number {
+    public get count(): number {
         return this.data.length;
     }
 

@@ -4,7 +4,7 @@ describe('task list behaviour', () => {
     test('create empty task list', () => {
         let task_list = createEmptyList();
 
-        expect(task_list.count()).toBe(0);
+        expect(task_list.count).toBe(0);
     })
 
     test('add a task to the list', () => {
@@ -13,8 +13,12 @@ describe('task list behaviour', () => {
 
         task_list.add(task);
 
-        expect(task_list.count()).toBe(1);
+        expect(task_list.count).toBe(1);
     })
+
+    test.todo('remove task')
+
+    test.todo('task sort')
 })
 
 function createSimpleTask() {
