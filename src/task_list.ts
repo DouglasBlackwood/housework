@@ -12,22 +12,23 @@ class TaskList {
         this.data.push(task);
         this.data.sort((a, b) => {
             // Sort by status if status is different
-            if (a.status - b.status !== 0) {
+            if (a.status !== b.status) {
                 return a.status - b.status;
             }
 
-            // Sort by title if tasks are done
-            if (a.is_done && b.is_done) {
-                if (a.title < b.title) {
-                    return -1;
-                } else if (a.title > b.title) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+            // Sort by undone_ratio if possible
+            if (!a.is_done && !b.is_done && a.undone_ratio !== b.undone_ratio) {
+                return b.undone_ratio - a.undone_ratio;
             }
 
-            return 0;
+            // Sort by title by default
+            if (a.title < b.title) {
+                return -1;
+            } else if (a.title > b.title) {
+                return 1;
+            } else {
+                return 0;
+            }
         })
     }
 

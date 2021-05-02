@@ -73,6 +73,41 @@ describe('task list behaviour', () => {
             expect(task).toEqual(expected_task);
         }
     })
+
+    test('todo task order by undone ratio, then by title', () => {
+        const today = new Date();
+        let five_days_ago = new Date();
+        five_days_ago.setDate(today.getDate() - 5);
+        let six_days_ago = new Date();
+        six_days_ago.setDate(today.getDate() - 6);
+        const task_done_1 = new Task({ title: 'todo first', days_till_undone: 1, done_at: six_days_ago })
+        const task_done_2 = new Task({ title: 'todo second', days_till_undone: 1, done_at: five_days_ago })
+        const task_done_3 = new Task({ title: 'todo third', days_till_undone: 1, done_at: five_days_ago })
+
+        const task_list = createEmptyList();
+        task_list.add(task_done_3);
+        task_list.add(task_done_2);
+        task_list.add(task_done_1);
+
+        const expected_order = [task_done_1, task_done_2, task_done_3];
+
+        // Check test consistency
+        expect(task_list.count).toBe(expected_order.length);
+        expect(task_done_1.undone_ratio).toBeCloseTo(6);
+        expect(task_done_2.undone_ratio).toBeCloseTo(5);
+        expect(task_done_3.undone_ratio).toBeCloseTo(5);
+
+        const task_iterator = task_list.getIterator();
+        while (!task_iterator.done) {
+            const task = task_iterator.next();
+            expect(task).toBeInstanceOf(Task);
+
+            const expected_task = expected_order[task_iterator.current_index];
+            expect(expected_task).toBeInstanceOf(Task);
+
+            expect(task).toEqual(expected_task);
+        }
+    })
 })
 
 function createSimpleTask() {
