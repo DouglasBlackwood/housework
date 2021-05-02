@@ -7,7 +7,7 @@ class Task {
     days_till_undone?: number;
     done_at?: Date;
 
-    late_factor: number = 1.5;
+    private late_factor: number = 1.5;
 
     constructor({ title, days_till_undone, done_at }: TaskConstructorInterface) {
         this.title = title;
@@ -76,17 +76,20 @@ class Task {
     }
 
     public get undone_ratio(): number {
-        if (this.done_at && this.days_till_undone) {
-            const today = new Date();
-            const difference_in_ms = today.getTime() - this.done_at.getTime();
-            const difference_in_days = difference_in_ms / (1000 * 60 * 60 * 24);
-            const result = difference_in_days / this.days_till_undone
-            return result;
+        if (this.done_since && this.days_till_undone) {
+            return this.done_since / this.days_till_undone
         } else {
             return 0;
         }
     }
 
+
+    public get done_since(): number | undefined {
+        if (this.done_at) {
+            const done_since_in_ms = Calendar.today.getTime() - this.done_at.getTime();
+            return done_since_in_ms / Calendar.millisecond_in_a_day;
+        }
+    }
 
 }
 
