@@ -11,15 +11,23 @@ class TaskList {
     add(task: Task): void {
         this.data.push(task);
         this.data.sort((a, b) => {
+            // Sort by status if status is different
             if (a.status - b.status !== 0) {
                 return a.status - b.status;
-            } else if (a.title < b.title) {
-                return -1;
-            } else if (a.title > b.title) {
-                return 1;
-            } else {
-                return 0;
             }
+
+            // Sort by title if tasks are done
+            if (a.is_done && b.is_done) {
+                if (a.title < b.title) {
+                    return -1;
+                } else if (a.title > b.title) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+
+            return 0;
         })
     }
 
