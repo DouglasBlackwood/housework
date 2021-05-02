@@ -10,11 +10,9 @@ class TaskList {
 
     add(task: Task): void {
         this.data.push(task);
-        this.data.sort((a, b)=>{
-            if (a.status < b.status) {
-                return -1;
-            } else if (a.status > b.status) {
-                return 1;
+        this.data.sort((a, b) => {
+            if (a.status - b.status !== 0) {
+                return a.status - b.status;
             } else if (a.title < b.title) {
                 return -1;
             } else if (a.title > b.title) {
@@ -42,11 +40,11 @@ class TaskList {
 class TaskIterator implements Iterator<Task> {
     private tasks: Task[];
     private next_position: number = 0;
-    
+
     constructor(tasks: Task[]) {
         this.tasks = tasks
     }
-    
+
     current(): Task {
         return this.tasks[this.next_position];
     }

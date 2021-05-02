@@ -18,13 +18,11 @@ describe('task list behaviour', () => {
         expect(task_list.count).toBe(0);
     })
 
-    test('task order', () => {
+    test('task order by status', () => {
         const today = new Date();
         let two_days_ago = new Date();
         two_days_ago.setDate(today.getDate() - 2);
         const task_list = createEmptyList();
-        const task_done_bis = new Task({ title: 'done bis', done_at: today })
-        task_list.add(task_done_bis);
         const task_done = new Task({ title: 'done', done_at: today })
         task_list.add(task_done);
         const task_todo = new Task({ title: 'todo' });
@@ -32,8 +30,9 @@ describe('task list behaviour', () => {
         const task_late = new Task({ title: 'late', done_at: two_days_ago, days_till_undone: 1 });
         task_list.add(task_late);
 
-        const expected_order = [task_late, task_todo, task_done, task_done_bis];
+        const expected_order = [task_late, task_todo, task_done];
 
+        // Check test consistency
         expect(task_list.count).toBe(expected_order.length);
 
         const task_iterator = task_list.getIterator();
