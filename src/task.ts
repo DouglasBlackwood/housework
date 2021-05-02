@@ -83,7 +83,6 @@ class Task {
         }
     }
 
-
     public get done_since(): number | undefined {
         if (this.done_at) {
             const done_since_in_ms = Calendar.today.getTime() - this.done_at.getTime();
