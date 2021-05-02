@@ -9,6 +9,7 @@ describe('task behaviour', () => {
         expect(task.done_at).toBeUndefined();
         expect(task.is_done).toBeFalsy();
         expect(task.status).toBe(TaskStatus.ToDo);
+        expect(task.undone_ratio).toBeCloseTo(0);
     });
 
     test('create non-recurring task done', () => {
@@ -19,6 +20,7 @@ describe('task behaviour', () => {
         expect(task.done_at).toBe(done_at);
         expect(task.is_done).toBeTruthy();
         expect(task.status).toBe(TaskStatus.Done);
+        expect(task.undone_ratio).toBeCloseTo(0);
     });
 
     test('create recurring task not done', () => {
@@ -28,6 +30,7 @@ describe('task behaviour', () => {
         expect(task.done_at).toBeUndefined();
         expect(task.is_done).toBeFalsy();
         expect(task.status).toBe(TaskStatus.ToDo);
+        expect(task.undone_ratio).toBeCloseTo(0);
     });
 
     test('create recurring task done', () => {
@@ -38,6 +41,7 @@ describe('task behaviour', () => {
         expect(task.done_at).toBe(done_at);
         expect(task.is_done).toBeTruthy();
         expect(task.status).toBe(TaskStatus.Done);
+        expect(task.undone_ratio).toBeCloseTo(0);
     });
 
     test('create recurring task undone', () => {
@@ -49,6 +53,7 @@ describe('task behaviour', () => {
         expect(task.done_at).toBe(done_at);
         expect(task.is_done).toBeFalsy();
         expect(task.status).toBe(TaskStatus.ToDo);
+        expect(task.undone_ratio).toBeCloseTo(1);
     });
 
     test('undo task', () => {
@@ -75,6 +80,7 @@ describe('task behaviour', () => {
         let task = new Task({ title: 'Chore', days_till_undone: 1, done_at: done_at });
 
         expect(task.status).toBe(TaskStatus.Late);
+        expect(task.undone_ratio).toBeCloseTo(2);
     });
 
     test('task due every 1 day is late after 2 days', () => {

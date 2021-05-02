@@ -75,6 +75,19 @@ class Task {
         this.title = title;
     }
 
+    public get undone_ratio(): number {
+        if (this.done_at && this.days_till_undone) {
+            const today = new Date();
+            const difference_in_ms = today.getTime() - this.done_at.getTime();
+            const difference_in_days = difference_in_ms / (1000 * 60 * 60 * 24);
+            const result = difference_in_days / this.days_till_undone
+            return result;
+        } else {
+            return 0;
+        }
+    }
+
+
 }
 
 interface TaskConstructorInterface {
